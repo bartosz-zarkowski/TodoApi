@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TodoApi.Configs;
+using TodoApi.Repository;
 
 namespace TodoApi.Extensions;
 
@@ -13,6 +14,8 @@ public static class ServiceRegistratonExtension
 
         services.AddDbContext<TodoDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped(typeof(IBaseEntityRepository<>), typeof(BaseEntityRepository<>));
 
         return services;
     }

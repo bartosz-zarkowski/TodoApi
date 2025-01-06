@@ -5,7 +5,6 @@ namespace TodoApi.Entities.Configurations;
 
 abstract class TodoItemConfig : IEntityTypeConfiguration<TodoItem>
 {
-
     public void Configure(EntityTypeBuilder<TodoItem> builder) 
     {
         builder.Property(i => i.Id).ValueGeneratedOnAdd();
