@@ -1,14 +1,15 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Configs;
-using TodoApi.Entities;
+using TodoApi.Interfaces.Entities;
+using TodoApi.Interfaces.Repositories;
 
 namespace TodoApi.Repository;
 
-public class BaseEntityRepository<TEntity> : IBaseEntityRepository<TEntity> where TEntity : class, IEntity
+public class BaseEntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : class, IEntity
 {
-    internal readonly TodoDbContext _context;
-    internal readonly DbSet<TEntity> _dbSet;
+    private readonly TodoDbContext _context;
+    private readonly DbSet<TEntity> _dbSet;
 
     public BaseEntityRepository(TodoDbContext context)
     {
@@ -31,16 +32,20 @@ public class BaseEntityRepository<TEntity> : IBaseEntityRepository<TEntity> wher
         return await query.ToListAsync();
     }
 
-    public virtual async Task CreateAsync(TEntity entity)
+    public virtual async Task<TEntity> CreateAsync(TEntity entity)
     {
         await _dbSet.AddAsync(entity);
         await SaveAsync();
+
+        return entity;
     }
 
-    public virtual async Task UpdateAsync(TEntity entity)
+    public virtual async Task<TEntity> UpdateAsync(TEntity entity)
     {
         _dbSet.Update(entity);
         await SaveAsync();
+
+        return entity;
     }
 
     public virtual async Task DeleteByIdAsync(Guid id)

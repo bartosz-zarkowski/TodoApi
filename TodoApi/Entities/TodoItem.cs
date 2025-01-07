@@ -1,5 +1,6 @@
 ﻿
 using TodoApi.Enums;
+using TodoApi.Interfaces.Entities;
 
 namespace TodoApi.Entities;
 
@@ -12,7 +13,7 @@ public class TodoItem : IEntity
     public TodoItemPriority Priority { get; set; } = TodoItemPriority.Medium;
 
     public Guid CategoryId { get; set; }
-    public required ToDoItemCategory Category { get; set; }
+    public required TodoItemCategory Category { get; set; }
 
     public DateTimeOffset DueDate { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
