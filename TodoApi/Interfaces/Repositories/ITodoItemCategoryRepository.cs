@@ -4,5 +4,5 @@ namespace TodoApi.Interfaces.Repositories;
 
 public interface ITodoItemCategoryRepository : IEntityRepository<TodoItemCategory>
 {
-    Task<bool> IsExisiingCategory(Guid id);
+    Task<bool> IsExisiingCategoryAsync(Guid id);
 }

@@ -1,0 +1,49 @@
+﻿using FluentAssertions;
+using Moq;
+using TodoApi.Dtos.TodoItemCategory;
+using TodoApi.Entities;
+using TodoApi.Interfaces.Repositories;
+using TodoApi.Services;
+using TodoApi.Tests.DummyData;
+
+namespace TodoApi.Tests.Services;
+
+public class TodoItemCategoryServiceTest 
+    : BaseEntityServiceTest<TodoItemCategory, TodoItemCategoryViewDto, TodoItemCategoryCreateDto, TodoItemCategoryUpdateDto, TodoItemCategoryService, ITodoItemCategoryRepository>
+{
+    [Fact]
+    public async Task IsExistingCategoryAsync_ForExisitngCategory_ReturnsTrue()
+    {
+        var categoryId = Entity.Id;
+
+        _repositoryMock.Setup(r => r.IsExisiingCategoryAsync(categoryId))
+            .ReturnsAsync(true);
+
+        bool isExistingCategoryResponse = await _service.IsExistingCategoryAsync(categoryId);
+
+        isExistingCategoryResponse.Should().BeTrue();
+        _repositoryMock.Verify(r => r.IsExisiingCategoryAsync(categoryId), Times.Once);
+    }
+
+    [Fact]
+    public async Task IsExistingCategoryAsync_ForNotExisitngCategory_ReturnsFalse()
+    {
+        var categoryId = Entity.Id;
+
+        _repositoryMock.Setup(r => r.IsExisiingCategoryAsync(categoryId))
+            .ReturnsAsync(false);
+
+        bool isExistingCategoryResponse = await _service.IsExistingCategoryAsync(categoryId);
+
+        isExistingCategoryResponse.Should().BeFalse();
+        _repositoryMock.Verify(r => r.IsExisiingCategoryAsync(categoryId), Times.Once);
+    }
+
+    protected override TodoItemCategoryService CreateService() =>
+        new TodoItemCategoryService(_repositoryMock.Object, _mapperMock.Object, _validatorMock.Object);
+
+    protected override TodoItemCategory Entity => TodoItemCategoryDummyData.TodoItemCategory;
+    protected override TodoItemCategoryViewDto ViewDto => TodoItemCategoryDummyData.todoItemCategoryViewDto;
+    protected override TodoItemCategoryCreateDto CreateDto => TodoItemCategoryDummyData.todoItemCategoryCreateDto;
+    protected override TodoItemCategoryUpdateDto UpdateDto => TodoItemCategoryDummyData.todoItemCategoryUpdateDto;
+}

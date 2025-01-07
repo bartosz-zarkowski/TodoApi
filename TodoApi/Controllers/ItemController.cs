@@ -20,7 +20,7 @@ namespace TodoApi.Controllers
         [HttpPut("{id:guid}/status")]
         public async Task<ActionResult<TodoItemViewDto>> PutStatusAsync(Guid id, TodoItemStatusDto todoItemStatusDto)
         {
-            TodoItemViewDto? todoItemViewDto = await _service.UpdateStatusById(id, todoItemStatusDto);
+            TodoItemViewDto? todoItemViewDto = await _service.UpdateStatusByIdAsync(id, todoItemStatusDto);
 
             if (todoItemViewDto == null)
             {

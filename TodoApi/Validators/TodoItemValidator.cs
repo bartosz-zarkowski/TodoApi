@@ -25,7 +25,7 @@ public class TodoItemValidator : AbstractValidator<TodoItem>
 
         RuleFor(x => x.CategoryId)
             .NotEmpty().WithMessage("CategoryId cannot be empty.")
-            .MustAsync(async (id, cancellactionToken) => await categoryService.IsExistingCategory(id))
+            .MustAsync(async (id, cancellactionToken) => await categoryService.IsExistingCategoryAsync(id))
             .WithMessage("Category with the given CategoryId does not exist.");
 
         RuleFor(x => x.DueDate)

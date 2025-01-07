@@ -20,7 +20,7 @@ public class TodoItemService : BaseEntityService<TodoItem, TodoItemViewDto, Todo
         _validator = validator;
     }
 
-    public async Task<TodoItemViewDto?> UpdateStatusById(Guid id, TodoItemStatusDto todoItemStatusDto)
+    public async Task<TodoItemViewDto?> UpdateStatusByIdAsync(Guid id, TodoItemStatusDto todoItemStatusDto)
     {
         TodoItem? todoItem = await _repository.FindByIdAsync(id);
         

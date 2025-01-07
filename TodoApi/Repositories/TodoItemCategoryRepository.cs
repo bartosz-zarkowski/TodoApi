@@ -15,7 +15,7 @@ public class TodoItemCategoryRepository : BaseEntityRepository<TodoItemCategory>
         _dbSet = context.Set<TodoItemCategory>();
     }
 
-    public async Task<bool> IsExisiingCategory(Guid id)
+    public async Task<bool> IsExisiingCategoryAsync(Guid id)
     {
         return await _dbSet.AnyAsync(x => x.Id == id);
     }

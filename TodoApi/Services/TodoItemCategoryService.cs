@@ -20,8 +20,8 @@ public class TodoItemCategoryService : BaseEntityService<TodoItemCategory, TodoI
         _repository = repository;
     }
 
-    public async Task<bool> IsExistingCategory(Guid id)
+    public async Task<bool> IsExistingCategoryAsync(Guid id)
     {
-        return await _repository.IsExisiingCategory(id);
+        return await _repository.IsExisiingCategoryAsync(id);
     }
 }
