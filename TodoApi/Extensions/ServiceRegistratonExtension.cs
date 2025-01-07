@@ -1,11 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using TodoApi.Configs;
 using TodoApi.Interfaces.Repositories;
 using TodoApi.Interfaces.Services;
+using TodoApi.Repositories;
 using TodoApi.Repository;
 using TodoApi.Services;
+using TodoApi.Validators;
 
 namespace TodoApi.Extensions;
 
@@ -31,9 +34,14 @@ public static class ServiceRegistratonExtension
         services.AddDbContext<TodoDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddValidatorsFromAssemblyContaining<TodoItemValidator>();
+
         services.AddScoped(typeof(IEntityRepository<>), typeof(BaseEntityRepository<>));
+        services.AddScoped<ITodoItemCategoryRepository, TodoItemCategoryRepository>();
+
         services.AddScoped(typeof(IEntityService<,,,>), typeof(BaseEntityService<,,,>));
         services.AddScoped<ITodoItemService, TodoItemService>();
+        services.AddScoped<ITodoItemCategoryService, TodoItemCategoryService>();
 
         return services;
     }

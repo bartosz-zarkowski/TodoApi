@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
-using TodoApi.Interfaces.Dtos;
+using FluentValidation;
+using TodoApi.Interfaces.Dtos.Common;
 using TodoApi.Interfaces.Entities;
 using TodoApi.Interfaces.Repositories;
 using TodoApi.Interfaces.Services;
@@ -14,13 +15,15 @@ public class BaseEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> : IEnt
     where TUpdateDto : class, IDto
 {
 
-    private IEntityRepository<TEntity> _repository;
-    private IMapper _mapper;
+    private readonly IEntityRepository<TEntity> _repository;
+    private readonly IMapper _mapper;
+    private readonly IValidator<TEntity> _validator;
 
-    public BaseEntityService(IEntityRepository<TEntity> repository, IMapper mapper)
+    public BaseEntityService(IEntityRepository<TEntity> repository, IMapper mapper, IValidator<TEntity> validator)
     {
         _repository = repository;
         _mapper = mapper;
+        _validator = validator;
     }
 
     public virtual async Task<TViewDto?> GetByIdAsync(Guid id)
@@ -45,6 +48,8 @@ public class BaseEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> : IEnt
     {
         TEntity entity = _mapper.Map<TEntity>(createDto);
 
+        await _validator.ValidateAndThrowAsync(entity);
+
         await _repository.CreateAsync(entity);
 
         return _mapper.Map<TViewDto>(entity);
@@ -59,6 +64,8 @@ public class BaseEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> : IEnt
         }
 
         _mapper.Map(updateDto, entity);
+
+        await _validator.ValidateAndThrowAsync(entity);
 
         await _repository.UpdateAsync(entity);
 

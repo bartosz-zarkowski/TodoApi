@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TodoApi.Interfaces.Dtos;
+using TodoApi.Interfaces.Dtos.Common;
 using TodoApi.Interfaces.Entities;
 using TodoApi.Interfaces.Services;
 namespace TodoApi.Controllers;

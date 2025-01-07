@@ -1,5 +1,5 @@
 ﻿using TodoApi.Enums;
-using TodoApi.Interfaces.Dtos;
+using TodoApi.Interfaces.Dtos.Common;
 
 namespace TodoApi.Dtos.TodoItem;
 

@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using TodoApi.Interfaces.Dtos;
+using TodoApi.Interfaces.Dtos.Common;
 using TodoApi.Interfaces.Entities;
 
 namespace TodoApi.Interfaces.Services;
