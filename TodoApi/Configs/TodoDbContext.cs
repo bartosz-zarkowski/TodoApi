@@ -16,5 +16,5 @@ public class TodoDbContext : DbContext
     }
 
     public DbSet<TodoItem> Items { get; set; }
-    public DbSet<ToDoItemCategory> Categories { get; set; }
+    public DbSet<TodoItemCategory> Categories { get; set; }
 }
