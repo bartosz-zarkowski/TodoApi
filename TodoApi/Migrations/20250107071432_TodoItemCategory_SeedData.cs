@@ -5,7 +5,7 @@
 namespace TodoApi.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSeedData : Migration
+    public partial class TodoItemCategory_SeedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

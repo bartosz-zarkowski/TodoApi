@@ -1,0 +1,9 @@
+﻿using TodoApi.Dtos.TodoItemCategory;
+using TodoApi.Entities;
+
+namespace TodoApi.Interfaces.Services;
+
+public interface ITodoItemCategoryService : IEntityService<TodoItemCategory, TodoItemCategoryViewDto, TodoItemCategoryCreateDto, TodoItemCategoryUpdateDto>
+{
+    Task<bool> IsExistingCategoryAsync(Guid id);
+}

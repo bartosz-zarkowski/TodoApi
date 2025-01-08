@@ -1,4 +1,4 @@
-﻿namespace TodoApi.Entities;
+﻿namespace TodoApi.Interfaces.Entities;
 
 public interface IEntity
 {
