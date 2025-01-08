@@ -54,9 +54,9 @@ public class TodoItemServiceTest
     protected override TodoItemService CreateService() =>
     new TodoItemService(_repositoryMock.Object, _mapperMock.Object, _validatorMock.Object);
 
-    protected override TodoItem Entity => TodoItemDummyData.TodoItem;
-    protected override TodoItemViewDto ViewDto => TodoItemDummyData.TodoItemViewDto;
-    protected override TodoItemCreateDto CreateDto => TodoItemDummyData.TodoItemCreateDto;
-    protected override TodoItemUpdateDto UpdateDto => TodoItemDummyData.TodoItemUpdateDto;
-    protected TodoItemStatusDto StatusDto => TodoItemDummyData.TodoItemStatusDto;
+    protected override TodoItem Entity => TodoItemFixture.TodoItem;
+    protected override TodoItemViewDto ViewDto => TodoItemFixture.TodoItemViewDto;
+    protected override TodoItemCreateDto CreateDto => TodoItemFixture.TodoItemCreateDto;
+    protected override TodoItemUpdateDto UpdateDto => TodoItemFixture.TodoItemUpdateDto;
+    protected TodoItemStatusDto StatusDto => TodoItemFixture.TodoItemStatusDto;
 }

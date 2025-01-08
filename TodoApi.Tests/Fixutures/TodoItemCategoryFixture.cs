@@ -3,7 +3,7 @@ using TodoApi.Entities;
 
 namespace TodoApi.Tests.DummyData;
 
-public class TodoItemCategoryDummyData
+public class TodoItemCategoryFixture
 {
     public static Guid TodoItemCategoryId => new("902ce7b7-e85a-4ed0-a8a0-47daa722eed3");
 
