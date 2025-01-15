@@ -1,7 +1,7 @@
 ﻿using TodoApi.Dtos.TodoItemCategory;
 using TodoApi.Entities;
 
-namespace TodoApi.Tests.DummyData;
+namespace ToDoList.DataFixtures;
 
 public class TodoItemCategoryFixture
 {

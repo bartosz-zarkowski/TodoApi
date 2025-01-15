@@ -1,7 +1,7 @@
 ﻿
 using Testcontainers.PostgreSql;
 
-namespace TodoApi.Tests.Configs;
+namespace TodoList.Integration.Configs;
 
 public class PostgresTestContainer : IAsyncLifetime
 {

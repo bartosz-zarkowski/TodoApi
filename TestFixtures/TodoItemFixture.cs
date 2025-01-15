@@ -2,7 +2,7 @@
 using TodoApi.Entities;
 using TodoApi.Enums;
 
-namespace TodoApi.Tests.DummyData;
+namespace ToDoList.DataFixtures;
 
 public static class TodoItemFixture
 {

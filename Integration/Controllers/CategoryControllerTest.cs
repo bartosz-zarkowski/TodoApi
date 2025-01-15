@@ -2,10 +2,10 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
-using TodoApi.Tests.Configs;
-using TodoApi.Tests.DummyData;
+using TodoList.Integration.Configs;
+using ToDoList.DataFixtures;
 
-namespace TodoApi.Tests.Controllers;
+namespace TodoList.Integration.Controllers;
 
 public class CategoryControllerTest : IClassFixture<CustomWebApplicationFactory<Program>>
 {

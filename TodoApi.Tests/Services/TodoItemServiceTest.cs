@@ -5,7 +5,7 @@ using TodoApi.Dtos.TodoItem;
 using TodoApi.Entities;
 using TodoApi.Interfaces.Repositories;
 using TodoApi.Services;
-using TodoApi.Tests.DummyData;
+using ToDoList.DataFixtures;
 
 namespace TodoApi.Tests.Services;
 
