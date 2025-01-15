@@ -4,11 +4,11 @@ using TodoApi.Dtos.TodoItemCategory;
 using TodoApi.Entities;
 using TodoApi.Interfaces.Repositories;
 using TodoApi.Services;
-using ToDoList.DataFixtures;
+using ToDoList.DataFixtures.Fixtures;
 
-namespace TodoApi.Tests.Services;
+namespace TodoList.Unit.Services;
 
-public class TodoItemCategoryServiceTest 
+public class TodoItemCategoryServiceTest
     : BaseEntityServiceTest<TodoItemCategory, TodoItemCategoryViewDto, TodoItemCategoryCreateDto, TodoItemCategoryUpdateDto, TodoItemCategoryService, ITodoItemCategoryRepository>
 {
     [Fact]

@@ -1,7 +1,7 @@
 ﻿using TodoApi.Dtos.TodoItemCategory;
 using TodoApi.Entities;
 
-namespace ToDoList.DataFixtures;
+namespace ToDoList.DataFixtures.Fixtures;
 
 public class TodoItemCategoryFixture
 {

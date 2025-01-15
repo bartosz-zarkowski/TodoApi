@@ -7,7 +7,7 @@ using TodoApi.Interfaces.Entities;
 using TodoApi.Interfaces.Repositories;
 using TodoApi.Interfaces.Services;
 
-namespace TodoApi.Tests.Services;
+namespace TodoList.Unit.Services;
 
 public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpdateDto, TService, TRepository>
     where TEntity : class, IEntity
@@ -15,7 +15,7 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
     where TCreateDto : class, IDto
     where TUpdateDto : class, IDto
     where TService : class, IEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto>
-    where TRepository: class, IEntityRepository<TEntity>
+    where TRepository : class, IEntityRepository<TEntity>
 {
     protected abstract TService CreateService();
 

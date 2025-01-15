@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using TodoList.Integration.Configs;
-using ToDoList.DataFixtures;
+using ToDoList.DataFixtures.Fixtures;
 
 namespace TodoList.Integration.Controllers;
 

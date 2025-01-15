@@ -5,13 +5,13 @@ using TodoApi.Dtos.TodoItem;
 using TodoApi.Entities;
 using TodoApi.Interfaces.Repositories;
 using TodoApi.Services;
-using ToDoList.DataFixtures;
+using ToDoList.DataFixtures.Fixtures;
 
-namespace TodoApi.Tests.Services;
+namespace TodoList.Unit.Services;
 
 public class TodoItemServiceTest
     : BaseEntityServiceTest<TodoItem, TodoItemViewDto, TodoItemCreateDto, TodoItemUpdateDto, TodoItemService, IEntityRepository<TodoItem>>
-{   
+{
     [Fact]
     public async Task UpdateStatusById_ForNotExisitngItem_ReturnsNull()
     {
