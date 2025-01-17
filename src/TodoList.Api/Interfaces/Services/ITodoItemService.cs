@@ -1,5 +1,5 @@
-﻿using TodoList.Api.Dtos.TodoItem;
-using TodoList.Api.Entities;
+﻿using TodoList.Api.Database.Entities;
+using TodoList.Api.Dtos.TodoItem;
 
 namespace TodoList.Api.Interfaces.Services;
 

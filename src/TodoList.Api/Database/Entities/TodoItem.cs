@@ -1,7 +1,7 @@
 ﻿using TodoList.Api.Enums;
 using TodoList.Api.Interfaces.Entities;
 
-namespace TodoList.Api.Entities;
+namespace TodoList.Api.Database.Entities;
 
 public class TodoItem : IEntity
 {

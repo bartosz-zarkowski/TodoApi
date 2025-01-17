@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using TodoList.Api.Entities;
+using TodoList.Api.Database.Entities;
 
-namespace TodoList.Api.Configs;
+namespace TodoList.Api.Database;
 
 public class TodoDbContext : DbContext
 {

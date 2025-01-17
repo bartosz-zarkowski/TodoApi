@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TodoList.Api.Database.Entities;
 
-namespace TodoList.Api.Entities.Configs;
+namespace TodoList.Api.Database.Configs;
 
 abstract class TodoItemCategoryConfig : IEntityTypeConfiguration<TodoItemCategory>
 {
-
     public void Configure(EntityTypeBuilder<TodoItemCategory> builder)
     {
         builder.Property(c => c.Id).ValueGeneratedOnAdd();

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TodoList.Api.Entities;
+using TodoList.Api.Database.Entities;
 using TodoList.Api.Interfaces.Services;
 
 namespace TodoList.Api.Validators;

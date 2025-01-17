@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TodoList.Api.Database.Entities;
 using TodoList.Api.Dtos.TodoItemCategory;
-using TodoList.Api.Entities;
 using TodoList.Api.Interfaces.Services;
 
 namespace TodoList.Api.Controllers;

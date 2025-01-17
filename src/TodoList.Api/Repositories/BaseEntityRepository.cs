@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using TodoList.Api.Configs;
+using TodoList.Api.Database;
 using TodoList.Api.Interfaces.Entities;
 using TodoList.Api.Interfaces.Repositories;
 

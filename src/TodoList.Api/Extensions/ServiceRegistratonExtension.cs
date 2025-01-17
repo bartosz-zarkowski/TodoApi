@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using TodoList.Api.Configs;
+using TodoList.Api.Database;
 using TodoList.Api.Interfaces.Repositories;
 using TodoList.Api.Interfaces.Services;
 using TodoList.Api.Repositories;

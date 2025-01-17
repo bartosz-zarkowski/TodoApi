@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TodoList.Api.Database.Entities;
 
-namespace TodoList.Api.Entities.Configs;
+namespace TodoList.Api.Database.Configs;
 
 abstract class TodoItemConfig : IEntityTypeConfiguration<TodoItem>
 {

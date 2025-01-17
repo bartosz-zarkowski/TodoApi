@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using TodoList.Api.Configs;
+using TodoList.Api.Database;
 
 namespace TodoList.IntegrationTests.Configs;
 
