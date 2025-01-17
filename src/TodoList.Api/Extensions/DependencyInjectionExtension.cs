@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -11,9 +13,9 @@ using TodoList.Api.Validators;
 
 namespace TodoList.Api.Extensions;
 
-public static class ServiceRegistratonExtension
+public static class DependencyInjectionExtension
 {
-    public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers()
             .AddNewtonsoftJson(options =>
@@ -30,8 +32,7 @@ public static class ServiceRegistratonExtension
 
         services.AddAutoMapper(typeof(Program));
 
-        services.AddDbContext<TodoDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+        services.ConfigureDatasource(configuration);
 
         services.AddValidatorsFromAssemblyContaining<TodoItemValidator>();
 
@@ -42,6 +43,16 @@ public static class ServiceRegistratonExtension
         services.AddScoped<ITodoItemService, TodoItemService>();
         services.AddScoped<ITodoItemCategoryService, TodoItemCategoryService>();
 
+        services.AddExceptionHandlers();
+
+        return services;
+    }
+
+    private static IServiceCollection ConfigureDatasource(this IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        services.AddDbContext<TodoDbContext>(options => options.UseNpgsql(connectionString));
         return services;
     }
 }
