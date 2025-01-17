@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using TodoList.Api.Database.Entities;
 using TodoList.Api.Dtos.TodoItemCategory;
-using TodoList.Api.Entities;
 
 namespace TodoList.Api.Mappings;
 

@@ -1,5 +1,5 @@
-﻿using TodoList.Api.Dtos.TodoItem;
-using TodoList.Api.Entities;
+﻿using TodoList.Api.Database.Entities;
+using TodoList.Api.Dtos.TodoItem;
 using TodoList.Api.Enums;
 
 namespace TodoList.TestFixtures.Fixtures;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TodoList.Api.Configs;
-using TodoList.Api.Entities;
+using TodoList.Api.Database;
+using TodoList.Api.Database.Entities;
 using TodoList.Api.Interfaces.Repositories;
 
 namespace TodoList.Api.Repositories;

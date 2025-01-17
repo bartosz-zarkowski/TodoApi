@@ -1,4 +1,4 @@
-﻿using TodoList.Api.Entities;
+﻿using TodoList.Api.Database.Entities;
 
 namespace TodoList.Api.Interfaces.Repositories;
 

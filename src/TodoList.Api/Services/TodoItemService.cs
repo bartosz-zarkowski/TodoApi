@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using TodoList.Api.Database.Entities;
 using TodoList.Api.Dtos.TodoItem;
-using TodoList.Api.Entities;
 using TodoList.Api.Interfaces.Repositories;
 using TodoList.Api.Interfaces.Services;
 

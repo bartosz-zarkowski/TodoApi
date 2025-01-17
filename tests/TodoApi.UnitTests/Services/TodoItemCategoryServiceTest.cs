@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
+using TodoList.Api.Database.Entities;
 using TodoList.Api.Dtos.TodoItemCategory;
-using TodoList.Api.Entities;
 using TodoList.Api.Interfaces.Repositories;
 using TodoList.Api.Services;
 using TodoList.TestFixtures.Fixtures;
