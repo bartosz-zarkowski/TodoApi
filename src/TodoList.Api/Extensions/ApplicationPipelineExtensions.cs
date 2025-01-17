@@ -1,8 +1,6 @@
-﻿using TodoList.Api.Database;
+﻿namespace TodoList.Api.Extensions;
 
-namespace TodoList.Api.Extensions;
-
-public static class ApplicationPipelineExtension
+public static class ApplicationPipelineExtensions
 {
     public static WebApplication ConfigureApplicationPipeline(this WebApplication app)
     {

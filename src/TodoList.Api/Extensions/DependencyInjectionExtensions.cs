@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using FluentValidation;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -13,7 +11,7 @@ using TodoList.Api.Validators;
 
 namespace TodoList.Api.Extensions;
 
-public static class DependencyInjectionExtension
+public static class DependencyInjectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {

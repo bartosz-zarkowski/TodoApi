@@ -31,8 +31,7 @@ public class NotFoundExceptionHandler : IExceptionHandler
         var problemDetails = new ProblemDetails
         {
             Status = StatusCodes.Status404NotFound,
-            Title = "Not Found",
-            Detail = notFoundException.Message
+            Title = "Not Found"
         };
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
