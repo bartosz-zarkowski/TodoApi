@@ -6,7 +6,7 @@ using TodoList.Api.Interfaces.Services;
 namespace TodoList.Api.Controllers;
 
 [ApiController]
-public abstract class BaseController<TEntity, TViewDto, TCreateDto, TUpdateDto> : ControllerBase
+public abstract class BaseCRUDController<TEntity, TViewDto, TCreateDto, TUpdateDto> : ControllerBase
     where TEntity : class, IEntity
     where TViewDto : class, IViewDto
     where TCreateDto : class, IDto
@@ -15,7 +15,9 @@ public abstract class BaseController<TEntity, TViewDto, TCreateDto, TUpdateDto> 
 
     private readonly IEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> _service;
 
-    public BaseController(IEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> service)
+    public IEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> Service => throw new NotImplementedException();
+
+    public BaseCRUDController(IEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> service)
     {
         _service = service;
     }

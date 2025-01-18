@@ -5,8 +5,8 @@ using TodoList.Api.Interfaces.Services;
 
 namespace TodoList.Api.Controllers;
 
-[Route("api/v1/[controller]")]
-public class ItemController : BaseController<TodoItem, TodoItemViewDto, TodoItemCreateDto, TodoItemUpdateDto>
+[Route("api/v1/items")]
+public class ItemController : BaseCRUDController<TodoItem, TodoItemViewDto, TodoItemCreateDto, TodoItemUpdateDto>
 {
     private readonly ITodoItemService _service;
 
@@ -20,12 +20,7 @@ public class ItemController : BaseController<TodoItem, TodoItemViewDto, TodoItem
     [HttpPut("{id:guid}/status")]
     public async Task<ActionResult<TodoItemViewDto>> PutStatusAsync(Guid id, TodoItemStatusDto todoItemStatusDto)
     {
-        TodoItemViewDto? todoItemViewDto = await _service.UpdateStatusByIdAsync(id, todoItemStatusDto);
-
-        if (todoItemViewDto == null)
-        {
-            return NotFound();
-        }
+        TodoItemViewDto todoItemViewDto = await _service.UpdateStatusByIdAsync(id, todoItemStatusDto);
 
         return Ok(todoItemViewDto);
     }

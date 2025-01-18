@@ -43,7 +43,8 @@ public class TodoItemCategoryServiceTest
         new TodoItemCategoryService(_repositoryMock.Object, _mapperMock.Object, _validatorMock.Object);
 
     protected override TodoItemCategory Entity => TodoItemCategoryFixture.TodoItemCategory;
-    protected override TodoItemCategoryViewDto ViewDto => TodoItemCategoryFixture.todoItemCategoryViewDto;
-    protected override TodoItemCategoryCreateDto CreateDto => TodoItemCategoryFixture.todoItemCategoryCreateDto;
-    protected override TodoItemCategoryUpdateDto UpdateDto => TodoItemCategoryFixture.todoItemCategoryUpdateDto;
+    protected override TodoItemCategoryViewDto ViewDto => TodoItemCategoryFixture.TodoItemCategoryViewDto;
+    protected override TodoItemCategoryCreateDto CreateDto => TodoItemCategoryFixture.TodoItemCategoryCreateDto;
+    protected override TodoItemCategoryUpdateDto UpdateDto => TodoItemCategoryFixture.TodoItemCategoryUpdateDto;
+    protected override TodoItemCategory EntityToDelete => TodoItemCategoryFixture.TodoItemCategoryToDelete;
 }
