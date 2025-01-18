@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
 using FluentValidation;
+using TodoList.Api.Exceptions;
 using TodoList.Api.Interfaces.Dtos.Common;
 using TodoList.Api.Interfaces.Entities;
 using TodoList.Api.Interfaces.Repositories;
@@ -26,13 +27,10 @@ public class BaseEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> : IEnt
         _validator = validator;
     }
 
-    public virtual async Task<TViewDto?> GetByIdAsync(Guid id)
+    public virtual async Task<TViewDto> GetByIdAsync(Guid id)
     {
-        TEntity? entity = await _repository.FindByIdAsync(id);
-        if (entity == null)
-        {
-            return null;
-        }
+        TEntity entity = await _repository.FindByIdAsync(id)
+            ?? throw new NotFoundException();
 
         return _mapper.Map<TViewDto>(entity);
     }
@@ -55,13 +53,10 @@ public class BaseEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto> : IEnt
         return _mapper.Map<TViewDto>(entity);
     }
 
-    public virtual async Task<TViewDto?> UpdateByIdAsync(Guid id, TUpdateDto updateDto)
+    public virtual async Task<TViewDto> UpdateByIdAsync(Guid id, TUpdateDto updateDto)
     {
-        TEntity? entity = await _repository.FindByIdAsync(id);
-        if (entity == null)
-        {
-            return null;
-        }
+        TEntity entity = await _repository.FindByIdAsync(id)
+            ?? throw new NotFoundException();
 
         _mapper.Map(updateDto, entity);
 

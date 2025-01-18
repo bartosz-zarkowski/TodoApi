@@ -2,6 +2,7 @@
 using FluentValidation;
 using TodoList.Api.Database.Entities;
 using TodoList.Api.Dtos.TodoItem;
+using TodoList.Api.Exceptions;
 using TodoList.Api.Interfaces.Repositories;
 using TodoList.Api.Interfaces.Services;
 
@@ -20,14 +21,10 @@ public class TodoItemService : BaseEntityService<TodoItem, TodoItemViewDto, Todo
         _validator = validator;
     }
 
-    public async Task<TodoItemViewDto?> UpdateStatusByIdAsync(Guid id, TodoItemStatusDto todoItemStatusDto)
+    public async Task<TodoItemViewDto> UpdateStatusByIdAsync(Guid id, TodoItemStatusDto todoItemStatusDto)
     {
-        TodoItem? todoItem = await _repository.FindByIdAsync(id);
-
-        if (todoItem == null)
-        {
-            return null;
-        }
+        TodoItem todoItem = await _repository.FindByIdAsync(id)
+            ?? throw new NotFoundException();
 
         _mapper.Map(todoItemStatusDto, todoItem);
 

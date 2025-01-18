@@ -1,82 +1,24 @@
-﻿using System.Net.Http.Json;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Newtonsoft.Json;
+﻿using TodoList.Api.Database.Entities;
+using TodoList.Api.Dtos.TodoItemCategory;
 using TodoList.IntegrationTests.Configs;
 using TodoList.TestFixtures.Fixtures;
 
 namespace TodoList.IntegrationTests.Controllers;
 
-public class CategoryControllerTest : IClassFixture<CustomWebApplicationFactory<Program>>
+public class CategoryControllerTest
+    : BaseCRUDControllerTest<TodoItemCategory, TodoItemCategoryViewDto, TodoItemCategoryCreateDto, TodoItemCategoryUpdateDto>
 {
-    private readonly HttpClient _client;
+    public CategoryControllerTest(CustomWebApplicationFactory<Program> factory) : base(factory) { }
 
-    public CategoryControllerTest(CustomWebApplicationFactory<Program> factory)
-    {
-        factory.InitializeAsync().Wait();
-        _client = factory.CreateClient(new WebApplicationFactoryClientOptions
-        {
-            AllowAutoRedirect = false
-        });
-    }
+    protected override string BaseUrl => "/api/v1/categories";
 
-    [Fact]
-    public async Task GetCategoriesEndpoint_ReturnsSuccess()
-    {
-        var response = await _client.GetAsync("/api/v1/Category");
+    protected override TodoItemCategory Entity => TodoItemCategoryFixture.TodoItemCategory;
 
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-        content.Should().NotBeNullOrEmpty();
-    }
+    protected override TodoItemCategoryViewDto ViewDto => TodoItemCategoryFixture.TodoItemCategoryViewDto;
 
-    [Fact]
-    public async Task GetCategoryEndpoint_ForNotExistingCategory_ReturnsNotFound()
-    {
-        Guid notExistingCategoryId = Guid.NewGuid();
+    protected override TodoItemCategoryCreateDto CreateDto => TodoItemCategoryFixture.TodoItemCategoryCreateDto;
 
-        var response = await _client.GetAsync($"/api/v1/Category/{notExistingCategoryId}");
+    protected override TodoItemCategoryUpdateDto UpdateDto => TodoItemCategoryFixture.TodoItemCategoryUpdateDto;
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
-        var content = await response.Content.ReadAsStringAsync();
-        content.Should().NotBeNullOrEmpty();
-    }
-
-    [Fact]
-    public async Task PostCategoryEndpoint_ForValidTodoItemCategoryUpdateDto_ReturnsSuccess()
-    {
-        Guid notExistingCategoryId = Guid.NewGuid();
-        string todoItemCategoryUpdateDtoString = JsonConvert.SerializeObject(TodoItemCategoryFixture.todoItemCategoryUpdateDto);
-
-        var response = await _client.PostAsJsonAsync($"/api/v1/Category", TodoItemCategoryFixture.todoItemCategoryCreateDto);
-
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-        content.Should().NotBeNullOrEmpty();
-    }
-
-    [Fact]
-    public async Task PutCategoryEndpoint_ForNotExistingCategory_ReturnsNotFound()
-    {
-        Guid notExistingCategoryId = Guid.NewGuid();
-        string todoItemCategoryUpdateDtoString = JsonConvert.SerializeObject(TodoItemCategoryFixture.todoItemCategoryUpdateDto);
-
-        var response = await _client.PutAsJsonAsync($"/api/v1/Category/{notExistingCategoryId}", TodoItemCategoryFixture.todoItemCategoryUpdateDto);
-
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
-        var content = await response.Content.ReadAsStringAsync();
-        content.Should().NotBeNullOrEmpty();
-    }
-
-    [Fact]
-    public async Task DeleteCategoryEndpoint_ForNotExistingCategory_ReturnsNotFound()
-    {
-        Guid notExistingCategoryId = Guid.NewGuid();
-
-        var response = await _client.DeleteAsync($"/api/v1/Category/{notExistingCategoryId}");
-
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
-        var content = await response.Content.ReadAsStringAsync();
-        content.Should().NotBeNullOrEmpty();
-    }
+    protected override TodoItemCategory EntityToDelete => TodoItemCategoryFixture.TodoItemCategoryToDelete;
 }

@@ -5,11 +5,10 @@ using TodoList.Api.Interfaces.Services;
 
 namespace TodoList.Api.Controllers;
 
-[Route("api/v1/[controller]")]
+[Route("api/v1/categories")]
 [ApiController]
-public class CategoryController : BaseController<TodoItemCategory, TodoItemCategoryViewDto, TodoItemCategoryCreateDto, TodoItemCategoryUpdateDto>
+public class CategoryController : BaseCRUDController<TodoItemCategory, TodoItemCategoryViewDto, TodoItemCategoryCreateDto, TodoItemCategoryUpdateDto>
 {
-
     public CategoryController(
         IEntityService<TodoItemCategory, TodoItemCategoryViewDto, TodoItemCategoryCreateDto, TodoItemCategoryUpdateDto> service
     ) : base(service)

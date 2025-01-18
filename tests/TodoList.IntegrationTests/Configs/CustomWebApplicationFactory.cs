@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TodoList.Api.Database;
+using TodoList.TestFixtures.Fixtures;
 
 namespace TodoList.IntegrationTests.Configs;
 
@@ -24,9 +25,20 @@ public class CustomWebApplicationFactory<TProgram>
             });
 
             using var scope = services.BuildServiceProvider().CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
-            db.Database.Migrate();
+            var dbContext = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
+
+            dbContext.Database.Migrate();
+            
+            SeedTestData(dbContext);
         });
+    }
+
+    private void SeedTestData(TodoDbContext dbContext)
+    {
+        dbContext.Categories.AddRange(TodoItemCategoryFixture.TodoItemCategories);
+        dbContext.Items.AddRange(TodoItemFixture.TodoItems);
+
+        dbContext.SaveChanges();
     }
 
     public async Task InitializeAsync() => await _postgresContainer.InitializeAsync();

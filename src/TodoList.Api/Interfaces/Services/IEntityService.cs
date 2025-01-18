@@ -10,9 +10,9 @@ public interface IEntityService<TEntity, TViewDto, TCreateDto, TUpdateDto>
     where TCreateDto : class, IDto
     where TUpdateDto : class, IDto
 {
-    Task<TViewDto?> GetByIdAsync(Guid id);
+    Task<TViewDto> GetByIdAsync(Guid id);
     Task<IEnumerable<TViewDto>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null);
     Task<TViewDto> CreateAsync(TCreateDto createDto);
-    Task<TViewDto?> UpdateByIdAsync(Guid id, TUpdateDto updateDto);
+    Task<TViewDto> UpdateByIdAsync(Guid id, TUpdateDto updateDto);
     Task DeleteByIdAsync(Guid id);
 }

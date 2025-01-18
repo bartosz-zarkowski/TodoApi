@@ -2,6 +2,7 @@
 using FluentAssertions;
 using FluentValidation;
 using Moq;
+using TodoList.Api.Exceptions;
 using TodoList.Api.Interfaces.Dtos.Common;
 using TodoList.Api.Interfaces.Entities;
 using TodoList.Api.Interfaces.Repositories;
@@ -33,17 +34,17 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
     }
 
     [Fact]
-    public virtual async Task GetByIdAsync_ForNotExistingEntity_returnsNull()
+    public virtual async Task GetByIdAsync_ForNotExistingEntity_ThrowsNotFoundException()
     {
         Guid entityId = Entity.Id;
         TEntity entity = Entity;
 
         _repositoryMock.Setup(r => r.FindByIdAsync(entityId))
-            .ReturnsAsync(null as TEntity);
+            .ReturnsAsync(null as TEntity);;
 
-        TViewDto? viewDtoResponse = await _service.GetByIdAsync(entityId);
+        var serviceGetByIdAsync = () => _service.GetByIdAsync(entityId);
 
-        viewDtoResponse.Should().BeNull();
+        await serviceGetByIdAsync.Should().ThrowAsync<NotFoundException>();
         _repositoryMock.Verify(r => r.FindByIdAsync(entityId), Times.Once);
     }
 
@@ -108,7 +109,7 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
     }
 
     [Fact]
-    public virtual async Task UpdateById_ForNotExistingEntity_ReturnsNull()
+    public virtual async Task UpdateById_ForNotExistingEntity_ThrowsNotFoundException()
     {
         Guid entityId = Entity.Id;
         TUpdateDto updateDto = UpdateDto;
@@ -116,9 +117,9 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
         _repositoryMock.Setup(r => r.FindByIdAsync(entityId))
             .ReturnsAsync(null as TEntity);
 
-        TViewDto? viewDtoResponse = await _service.UpdateByIdAsync(entityId, updateDto);
+        var serviceUpdateByIdAsync = () => _service.UpdateByIdAsync(entityId, updateDto);
 
-        viewDtoResponse.Should().BeNull();
+        await serviceUpdateByIdAsync.Should().ThrowAsync<NotFoundException>();
         _repositoryMock.Verify(r => r.FindByIdAsync(entityId), Times.Once);
     }
 
@@ -147,7 +148,7 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
     [Fact]
     public virtual async Task DeleteByIdAsync_DeletesEntity()
     {
-        Guid entityId = Entity.Id;
+        Guid entityId = EntityToDelete.Id;
 
         await _service.DeleteByIdAsync(entityId);
 
@@ -158,4 +159,5 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
     protected abstract TViewDto ViewDto { get; }
     protected abstract TCreateDto CreateDto { get; }
     protected abstract TUpdateDto UpdateDto { get; }
+    protected abstract TEntity EntityToDelete { get; }
 }
