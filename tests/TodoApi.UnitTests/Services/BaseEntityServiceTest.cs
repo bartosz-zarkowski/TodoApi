@@ -148,7 +148,7 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
     [Fact]
     public virtual async Task DeleteByIdAsync_DeletesEntity()
     {
-        Guid entityId = Entity.Id;
+        Guid entityId = EntityToDelete.Id;
 
         await _service.DeleteByIdAsync(entityId);
 
@@ -159,4 +159,5 @@ public abstract class BaseEntityServiceTest<TEntity, TViewDto, TCreateDto, TUpda
     protected abstract TViewDto ViewDto { get; }
     protected abstract TCreateDto CreateDto { get; }
     protected abstract TUpdateDto UpdateDto { get; }
+    protected abstract TEntity EntityToDelete { get; }
 }

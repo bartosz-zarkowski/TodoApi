@@ -60,4 +60,5 @@ public class TodoItemServiceTest
     protected override TodoItemCreateDto CreateDto => TodoItemFixture.TodoItemCreateDto;
     protected override TodoItemUpdateDto UpdateDto => TodoItemFixture.TodoItemUpdateDto;
     protected TodoItemStatusDto StatusDto => TodoItemFixture.TodoItemStatusDto;
+    protected override TodoItem EntityToDelete => TodoItemFixture.TodoItemToDelete;
 }
