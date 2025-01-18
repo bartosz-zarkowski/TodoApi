@@ -3,6 +3,7 @@ using FluentAssertions;
 using Moq;
 using TodoList.Api.Database.Entities;
 using TodoList.Api.Dtos.TodoItem;
+using TodoList.Api.Exceptions;
 using TodoList.Api.Interfaces.Repositories;
 using TodoList.Api.Services;
 using TodoList.TestFixtures.Fixtures;
@@ -13,7 +14,7 @@ public class TodoItemServiceTest
     : BaseEntityServiceTest<TodoItem, TodoItemViewDto, TodoItemCreateDto, TodoItemUpdateDto, TodoItemService, IEntityRepository<TodoItem>>
 {
     [Fact]
-    public async Task UpdateStatusById_ForNotExisitngItem_ReturnsNull()
+    public async Task UpdateStatusById_ForNotExisitngItem_ThrowsNotFoundException()
     {
         Guid todoItemId = Entity.Id;
         TodoItemStatusDto statusDto = StatusDto;
@@ -21,9 +22,9 @@ public class TodoItemServiceTest
         _repositoryMock.Setup(r => r.FindByIdAsync(todoItemId))
             .ReturnsAsync(null as TodoItem);
 
-        TodoItemViewDto? viewDtoResult = await _service.UpdateStatusByIdAsync(todoItemId, statusDto);
+        var serviceUpdateStatusById = () => _service.UpdateStatusByIdAsync(todoItemId, statusDto);
 
-        viewDtoResult.Should().BeNull();
+        await serviceUpdateStatusById.Should().ThrowAsync<NotFoundException>();
         _repositoryMock.Verify(r => r.FindByIdAsync(todoItemId), Times.Once);
     }
 
