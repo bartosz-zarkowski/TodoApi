@@ -68,6 +68,7 @@ public static class DependencyInjectionExtensions
 
     private static IServiceCollection ConfigureHttpClient(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddTransient<LoggingDelegatingHandler>();
         services.AddTransient<AuthenticationDelegatingHandler>();
 
         Uri baseAddress = configuration.GetValue<Uri>("ExternalApi:BaseUrl")
@@ -77,7 +78,9 @@ public static class DependencyInjectionExtensions
         {
             client.BaseAddress = baseAddress;
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-        }).AddHttpMessageHandler<AuthenticationDelegatingHandler>();
+        })
+        .AddHttpMessageHandler<LoggingDelegatingHandler>()
+        .AddHttpMessageHandler<AuthenticationDelegatingHandler>();
 
         return services;
     }
